@@ -1,9 +1,9 @@
 # Graph-PatchTST for GNSS-PWV Forecasting
 
-This is a minimal release for aligned graph-based GNSS precipitable water vapor
+This repository provides aligned graph-based GNSS precipitable water vapor
 (PWV) forecasting over China's coastal station network.
 
-The release includes only the reproducible core:
+The repository includes the reproducible core:
 
 - download the public Wu et al. (2025) coastal GNSS-PWV dataset from Zenodo
 - preprocess the data into a 30-station aligned graph benchmark
@@ -67,12 +67,12 @@ See `docs/data_protocol.md` for details.
 
 ## Scope
 
-This minimal release is not a full benchmark suite. It does not include code for
+This repository is not a full benchmark suite. It does not include code for
 baseline sweeps, graph ablations, bootstrap confidence intervals, high-PWV event
 metrics, seasonal diagnostics, spatial diagnostics, or manuscript figures.
 
-Those analyses were used for the paper, but the public code surface here is
-limited to data preprocessing, model training, and validation/testing.
+Those analyses were used for the paper, but the public code here covers data
+preprocessing, model training, and validation/testing.
 
 ## Data Source
 

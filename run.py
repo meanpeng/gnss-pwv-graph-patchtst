@@ -1,5 +1,5 @@
 """
-Minimal CLI for the aligned graph GNSS-PWV forecasting release.
+CLI for the aligned graph GNSS-PWV forecasting release.
 
 Supported stages:
 download -> preprocess -> train -> evaluate

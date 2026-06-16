@@ -1,4 +1,4 @@
-"""Model registry for the minimal Graph-PatchTST release."""
+"""Model registry for the Graph-PatchTST release."""
 import os
 import pickle
 
@@ -26,7 +26,7 @@ def build_model_from_config(config):
     mcfg = config.model
     model_name = getattr(mcfg, "name", "graph_patchtst").lower()
     if model_name != "graph_patchtst":
-        raise ValueError("This minimal release only supports model.name=graph_patchtst.")
+        raise ValueError("This release only supports model.name=graph_patchtst.")
 
     adjacency_path = getattr(
         mcfg,
