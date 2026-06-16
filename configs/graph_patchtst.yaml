@@ -1,0 +1,81 @@
+﻿# === Data Configuration ===
+data:
+  dataset_mode: "graph"
+  raw_dir: "data/raw"
+  processed_dir: "data/graph_processed"
+  stations_file: "data/raw/CGN_sites.txt"
+
+  # Time series parameters
+  seq_len: 168
+  pred_len: 24
+
+  # Chronological split on the aligned network tensor
+  train_ratio: 0.7
+  val_ratio: 0.1
+  test_ratio: 0.2
+
+  # Per-station cleaning before alignment
+  missing_threshold: 0.3
+  impute_method: "linear"
+  normalize: true
+  scaler_type: "standard"
+
+  # Dataset sampling
+  stride: 1
+  train_samples_per_epoch: 47470
+  val_stride: 6
+
+  # Graph alignment and adjacency
+  graph_min_common_hours: 43800   # 5 years, so short-span stations are dropped
+  graph_min_num_nodes: 16
+  graph_top_k: 15
+  graph_distance_sigma_km: 800.0
+
+# === Model Configuration ===
+model:
+  name: "graph_patchtst"
+
+  # PatchTST temporal backbone
+  patch_len: 24
+  stride: 6
+  d_model: 64
+  n_heads: 2
+  e_layers: 2
+  d_ff: 64
+  dropout: 0.1
+
+  # Graph spatial mixing
+  adjacency_path: "data/graph_processed/adjacency_k15_sigma800.npy"
+  graph_layers: 1
+  graph_dropout: 0.1
+  graph_alpha_init: 0.1
+  use_node_embedding: true
+
+# === Training Configuration ===
+training:
+  device: "auto"
+  batch_size: 32
+  epochs: 100
+  lr: 0.001
+  optimizer: "Adam"
+  weight_decay: 0.0001
+  scheduler: "cosine_warmup"
+  T_max: 100
+  eta_min: 0.00001
+  warmup_epochs: 5
+  patience: 15
+  delta: 0.0001
+  val_interval: 5
+  use_amp: true
+  log_interval: 50
+  save_interval: 10
+
+# === Experiment ===
+experiment:
+  name: "graph_patchtst"
+  output_dir: "experiments/main_results"
+  seed: 42
+  num_workers: 2
+  metrics: ["mse", "mae", "rmse", "mape"]
+  visualize: true
+  save_predictions: true
